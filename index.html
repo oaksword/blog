@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Genetic-algorithm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/09/Genetic-algorithm/" class="article-date">
+  <time datetime="2020-07-09T11:22:00.000Z" itemprop="datePublished">2020-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/09/Genetic-algorithm/">搬运-遗传算法python程序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>遗传算法可用作优化算法。大意为初始化若干个体，个体经遗传变异产生子代，保留性状优良的群体，一步步演化从而迫近最优点。</p>
+<p>主函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import math</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">from ypstruct import structure</span><br><span class="line">import ga</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Sphere Test Function</span><br><span class="line">def sphere(x):</span><br><span class="line">    return np.sum(x ** 5)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Problem Definition</span><br><span class="line">problem &#x3D; structure()</span><br><span class="line">problem.costfunc &#x3D; sphere</span><br><span class="line">problem.nvar &#x3D; 5</span><br><span class="line">problem.varmin &#x3D; -10</span><br><span class="line">problem.varmax &#x3D; 10</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># GA Parameters</span><br><span class="line">params &#x3D; structure()</span><br><span class="line">params.maxit &#x3D; 100</span><br><span class="line">params.npop &#x3D; 20</span><br><span class="line">params.pc &#x3D; 1</span><br><span class="line">params.gamma &#x3D; 0.1</span><br><span class="line">params.mu &#x3D; 0.2</span><br><span class="line">params.sigma &#x3D; 0.1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Run GA</span><br><span class="line">out &#x3D; ga.run(problem, params)</span><br><span class="line"></span><br><span class="line"># Results</span><br><span class="line">print(&#39;Bset Solution: &#123;&#125;&#39;.format(out.bestsol.position))</span><br><span class="line">#plt.semilogy(out.bestcost)</span><br><span class="line">plt.plot(out.bestcost)</span><br><span class="line">plt.xlim(0, params.maxit)</span><br><span class="line">plt.xlabel(&#39;Iterations&#39;)</span><br><span class="line">plt.ylabel(&#39;Best Cost&#39;)</span><br><span class="line">plt.title(&#39;Genetic Algorithm (GA)&#39;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><code>ga</code> 内部算法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">from ypstruct import structure</span><br><span class="line"></span><br><span class="line">def run(problem, params):</span><br><span class="line">    </span><br><span class="line">    # Problem Infomation</span><br><span class="line">    costfunc &#x3D; problem.costfunc</span><br><span class="line">    nvar &#x3D; problem.nvar</span><br><span class="line">    varmin &#x3D; problem.varmin</span><br><span class="line">    varmax &#x3D; problem.varmax</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # Parameters</span><br><span class="line">    maxit &#x3D; params.maxit</span><br><span class="line">    npop &#x3D; params.npop</span><br><span class="line">    pc &#x3D; params.pc</span><br><span class="line">    nc &#x3D; int(np.round(pc * npop &#x2F;&#x2F; 2) * 2)</span><br><span class="line">    gamma &#x3D; params.gamma</span><br><span class="line">    mu &#x3D; params.mu</span><br><span class="line">    sigma &#x3D; params.sigma</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # Empty Individual Template</span><br><span class="line">    empty_individual &#x3D; structure()</span><br><span class="line">    empty_individual.position &#x3D; None</span><br><span class="line">    empty_individual.cost &#x3D; None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # Best Solution Ever Found</span><br><span class="line">    bestsol &#x3D; empty_individual.deepcopy()</span><br><span class="line">    bestsol.cost &#x3D; np.inf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # Initialize Population</span><br><span class="line">    pop &#x3D; empty_individual.repeat(npop)</span><br><span class="line">    for i in range(0, npop):</span><br><span class="line">        pop[i].position &#x3D; np.random.uniform(varmin, varmax, nvar)</span><br><span class="line">        pop[i].cost &#x3D; costfunc(pop[i].position)</span><br><span class="line">        if pop[i].cost &lt; bestsol.cost:</span><br><span class="line">            bestsol &#x3D; pop[i].deepcopy()</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    # Best Cost of Iterations</span><br><span class="line">    bestcost &#x3D; np.empty(maxit)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # Main Loop</span><br><span class="line">    for it in range(maxit):</span><br><span class="line"></span><br><span class="line">        popc &#x3D; []</span><br><span class="line">        for _ in range(nc &#x2F;&#x2F; 2):</span><br><span class="line">            </span><br><span class="line">            # Select Parents</span><br><span class="line">            q &#x3D; np.random.permutation(npop)</span><br><span class="line">            p1 &#x3D; pop[q[0]]</span><br><span class="line">            p2 &#x3D; pop[q[1]]</span><br><span class="line"></span><br><span class="line">            # Perform Crossover</span><br><span class="line">            c1, c2 &#x3D; crossover(p1, p2)</span><br><span class="line"></span><br><span class="line">            # Perform Mutation</span><br><span class="line">            c1 &#x3D; mutate(c1, mu, sigma)</span><br><span class="line">            c2 &#x3D; mutate(c2, mu, sigma)</span><br><span class="line"></span><br><span class="line">            # Apply Bounds</span><br><span class="line">            apply_bound(c1, varmin, varmax)</span><br><span class="line">            apply_bound(c2, varmin, varmax)</span><br><span class="line"></span><br><span class="line">            # Evaluate First Offspring</span><br><span class="line">            c1.cost &#x3D; costfunc(c1.position)</span><br><span class="line">            if c1.cost &lt; bestsol.cost:</span><br><span class="line">                bestsol &#x3D; c1.deepcopy()</span><br><span class="line"></span><br><span class="line">            # Evaluate Second Offspring</span><br><span class="line">            c2.cost &#x3D; costfunc(c2.position)</span><br><span class="line">            if c2.cost &lt; bestsol.cost:</span><br><span class="line">                bestsol &#x3D; c2.deepcopy()</span><br><span class="line">            </span><br><span class="line">            # Add Offsprings to popc</span><br><span class="line">            popc.append(c1)</span><br><span class="line">            popc.append(c2)</span><br><span class="line">        </span><br><span class="line">        # Merge, Sort and Select</span><br><span class="line">        pop +&#x3D; popc</span><br><span class="line">        pop &#x3D; sorted(pop, key &#x3D; lambda x: x.cost)</span><br><span class="line">        pop &#x3D; pop[:npop]</span><br><span class="line"></span><br><span class="line">        # Store Best Cost </span><br><span class="line">        bestcost[it] &#x3D; bestsol.cost</span><br><span class="line"></span><br><span class="line">        # Show Iteration In formation</span><br><span class="line">        print(&quot;Iteration &#123;&#125;: Best Cost &#x3D; &#123;&#125;&quot;.format(it, bestcost[it]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # Output</span><br><span class="line">    out &#x3D; structure()</span><br><span class="line">    out.pop &#x3D; pop</span><br><span class="line">    out.bestsol &#x3D; bestsol</span><br><span class="line">    out.bestcost &#x3D; bestcost</span><br><span class="line">    return out</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def crossover(p1, p2, gamma &#x3D; 0.1):</span><br><span class="line">    c1 &#x3D; p1.deepcopy()</span><br><span class="line">    c2 &#x3D; p2.deepcopy()</span><br><span class="line">    alpha &#x3D; np.random.uniform(-gamma, 1 + gamma, *c1.position.shape)</span><br><span class="line">    c1.position &#x3D; alpha * p1.position + (1 - alpha) * p2.position</span><br><span class="line">    c2.position &#x3D; alpha * p2.position + (1 - alpha) * p1.position</span><br><span class="line">    return c1, c2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def mutate(x, mu, sigma):</span><br><span class="line">    y &#x3D; x.deepcopy()</span><br><span class="line">    flag &#x3D; (np.random.rand(*y.position.shape) &lt;&#x3D; mu)</span><br><span class="line">    ind &#x3D; np.argwhere(flag)</span><br><span class="line">    y.position[ind] +&#x3D; sigma * np.random.randn(*ind.shape)</span><br><span class="line">    return y</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def apply_bound(x, varmin, varmax):</span><br><span class="line">    x.position &#x3D; np.maximum(x.position, varmin)</span><br><span class="line">    x.position &#x3D; np.minimum(x.position, varmax)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/09/Genetic-algorithm/" data-id="ckcetrge30001icuhdtllarl6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/07/09/Genetic-algorithm/">搬运-遗传算法python程序</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/09/A-beamer-template/">Beamer 模板</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/09/Hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
